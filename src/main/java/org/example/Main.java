@@ -22,6 +22,7 @@ public class Main {
     }
 //Creamos el primer metodo clasificacion de puntos
     public static void clasificacionPuntos(Connection conn) {
+        System.out.println("--------------------------------------------------------------");
         System.out.println("Primera consulta, puntos de los 10 ciclistas con mas puntos");
         String sql = "SELECT CICLISTA.NOMBRE AS ciclista_NOMBRE,EQUIPO.NOMBRE as equipo_nombre,SUM(PARTICIPACION.PUNTOS) AS SUMA \n" +
                 "FROM CICLISTA JOIN EQUIPO USING (ID_EQUIPO)  JOIN PARTICIPACION USING (ID_CICLISTA) \n" +
@@ -44,6 +45,9 @@ public class Main {
             throw new RuntimeException(e);
         }
 
+        System.out.println("--------------------------------------------------------------");
+
+
     }
 //Creamos el segundo metodo que nos muestra los equipos y los puntos de sus ciclistas
     public static void clasificacionEquipos(Connection conn) {
@@ -65,7 +69,7 @@ public class Main {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
+        System.out.println("--------------------------------------------------------------");
     }
     //El tercer metodo que nos muestra el ranking de etapas donde nos muestra las etapas con mayor distancia
     public static void rankingEtapas(Connection conn) {
@@ -84,7 +88,7 @@ public class Main {
                 String origen = rs.getString("origen");
                 String destino = rs.getString("destino");
                 double distancia = rs.getDouble("DISTANCIA_KM");
-                String fecha = rs.getString("FECHA");
+                Date fecha = rs.getDate("FECHA");
                 System.out.println( numero + " - "+ origen+ " - " + destino+ " - " + distancia + "km - " + fecha);
             }
         } catch (SQLException e) {
